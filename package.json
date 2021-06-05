@@ -1,10 +1,11 @@
 {
   "name": "react-set-state",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "better react useState",
   "author": "myckhel",
   "license": "MIT",
   "repository": "myckhel/react-set-state",
+  "homepage": "https://github.com/myckhel/react-set-state",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -12,8 +13,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "build": "microbundle-crl --format modern,cjs",
+    "start": "microbundle-crl watch --format modern,cjs",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",

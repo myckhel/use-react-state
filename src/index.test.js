@@ -1,7 +1,7 @@
-import useMergeState from '.'
+import useState from '.'
 
-describe('useMergeState', () => {
+describe('useState', () => {
   it('is truthy', () => {
-    expect(useMergeState).toBeTruthy()
+    expect(useState).toBeTruthy()
   })
 })
