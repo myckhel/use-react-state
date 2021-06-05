@@ -9095,7 +9095,7 @@ react-refresh@^0.8.3:
   version "0.0.0"
   uid ""
 
-"react-set-state@link:..":
+"use-react-state@link:..":
   version "0.0.0"
   uid ""
 

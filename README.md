@@ -1,18 +1,18 @@
-# react-set-state
+# use-react-state
 
 > react useState is now more intelligent
 
-[![NPM](https://img.shields.io/npm/v/react-set-state.svg)](https://www.npmjs.com/package/react-set-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/use-react-state.svg)](https://www.npmjs.com/package/use-react-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Overview
 
-`react-set-state` is an advanced implementation of [react component setState](https://reactjs.org/docs/react-component.html#setstate) to be used as a hook in function components.
+`use-react-state` is an advanced implementation of [react component setState](https://reactjs.org/docs/react-component.html#setstate) to be used as a hook in function components.
 It gives almost same and more functionality as [react component setState](https://reactjs.org/docs/react-component.html#setstate).
 
 ## Install
 
 ```bash
-yarn add react-set-state
+yarn add use-react-state
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ yarn add react-set-state
 ```js
 import React from 'react'
 
-import useState from 'react-set-state'
+import useState from 'use-react-state'
 
 const App = () => {
   const [state, setState] = useState({ nine: 9 })
@@ -28,6 +28,7 @@ const App = () => {
   return (
     <div>
       <p>Nine: is {state.nine}</p>
+
       <button onClick={() => setState(({ nine }) => ({ nine: nine + 1 }))}>
         Increaae state.nine by 1
       </button>
@@ -56,7 +57,7 @@ const App = () => {
 - - `stateRef` | state reference | `object`
 
 ```js
-import useState from 'react-set-state'
+import useState from 'use-react-state'
 const [state, setState, stateRef] = useState(initialState)
 ```
 
@@ -77,19 +78,27 @@ const [state, setState, stateRef] = useState(initialState)
 Given the 1st example below, setState will merge new state object with existing state given that existing state is an object.
 
 ```js
-import useState from 'react-set-state'
+import useState from 'use-react-state'
+
 const [state, setState, stateRef] = useState({ foo: 'foo' })
+
 // merge state object
 setState({ bar: 'bar' }) // {foo: 'foo', bar: 'bar'}
+
 // replace state
 setState('foo') // 'foo'
+
 // replace state
 setState(['foo']) // ['foo']
+
 // push state array
 setState(['bar']) // ['foo', 'bar']
+
 // custom state setter
 setState((existingDraftState) => {
+
   return ['baz']
+
 }) // ['baz']
 ```
 
@@ -99,11 +108,15 @@ setState uses immer's produce feature for state mutation.
 Your are not limited to using the functionality as well.
 
 ```js
-import useState from 'react-set-state'
+import useState from 'use-react-state'
+
 const [state, setState] = useState({ foo: 'foo' })
+
 // custom state setter with immer feature
 setState((existingDraftState) => {
+
   existingDraftState.bar = 'bar'
+
 }) // {foo: 'foo', bar: 'bar'}
 ```
 

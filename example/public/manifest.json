@@ -1,6 +1,6 @@
 {
-  "short_name": "react-set-state",
-  "name": "react-set-state",
+  "short_name": "use-react-state",
+  "name": "use-react-state",
   "icons": [
     {
       "src": "favicon.ico",

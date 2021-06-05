@@ -1,6 +1,6 @@
 import React, { useRef, memo } from 'react'
 
-import useState from 'react-set-state'
+import useState from 'use-react-state'
 
 const type = (value) => {
   switch (value?.constructor) {
