@@ -9,6 +9,65 @@
 `use-react-state` is an advanced implementation of [react component setState](https://reactjs.org/docs/react-component.html#setstate) to be used as a hook in function components.
 It gives almost same and more functionality as [react component setState](https://reactjs.org/docs/react-component.html#setstate).
 
+### Why?
+😢😭😿
+```jsx
+import { useState } from 'react'
+
+function Component(){
+  const [first, setFirst] = useState(1)
+  const [second, setSecond] = useState(2)
+  const [third, setThird] = useState(3)
+  const [fourth, setFourth] = useState(4)
+
+  const changeFirstAndSecond = () => {
+    setFirst(10)
+    setSecond(20)
+    // 2x re-render
+  }
+
+  const resetState = () => {
+    setFirst(1)
+    setSecond(2)
+    setThird(3)
+    setFourth(4)
+    // 4x re-render
+  }
+}
+```
+
+😊😃😺😄
+```jsx
+import useState from 'use-react-state'
+
+function Component(){
+  const [state, setState] = useState({
+    first: 1,
+    second: 2,
+    third: 3,
+    fourth: 4,
+  })
+
+  const changeFirstAndSecond = () => {
+    setState({
+      first: 10,
+      second: 20,
+    })
+    // 1x re-render
+  }
+
+  const resetState = () => {
+    setState({
+      first: 1,
+      second: 2,
+      third: 3,
+      fourth: 4,
+    })
+    // 1x re-render
+  }
+}
+```
+
 ## Install
 
 ```bash
