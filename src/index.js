@@ -1,10 +1,10 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState as useReactState, useRef, useCallback } from 'react'
 import produce from 'immer'
 
 const merge = (obj1, obj2) => Object.assign(obj1, obj2)
 
-const useMergeState = (initialState) => {
-  const [state, setState] = useState(initialState)
+const useState = (initialState) => {
+  const [state, setState] = useReactState(initialState)
   const stateRef = useRef(state)
   stateRef.current = state
 
@@ -40,4 +40,4 @@ const useMergeState = (initialState) => {
   return [state, setMergeState, stateRef]
 }
 
-export default useMergeState
+export default useState
