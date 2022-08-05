@@ -1,8 +1,12 @@
+import { AnyObject } from 'immer/dist/internal'
 import React, { useRef, memo } from 'react'
 
-import useState from 'use-react-state'
+import useState, { SetStateAction } from 'use-react-state'
 
-const type = (value) => {
+// type Primitive = string | boolean | number
+type Any = AnyObject | number | Array<any>
+
+const type = (value: any) => {
   switch (value?.constructor) {
     case Object:
       return 'object'
@@ -11,9 +15,9 @@ const type = (value) => {
   }
 }
 
-const isArray = (value) => type(value) === 'array'
+const isArray = (value: any) => type(value) === 'array'
 
-const stringify = (value) => {
+const stringify = (value: any) => {
   switch (value?.constructor) {
     case Array:
       return JSON.stringify(value)
@@ -25,7 +29,9 @@ const stringify = (value) => {
 }
 
 const App = () => {
-  const [state, setState] = useState({ state: { nine: 10 } })
+  const [state, setState] = useState<Any>({
+    state: { nine: 10 }
+  })
   const ref = useRef(state)
   const dEqual = state === ref.current
   // eslint-disable-next-line
@@ -40,17 +46,23 @@ const App = () => {
       <h6>
         State Type: {type(state)} : {new Date().getTime()}
       </h6>
-      <Text value={state} text={'State:'} />
-      {isArray(state) && <Array value={state} />}
+      <Text setState={setState} value={state} text={'State:'} />
+      {isArray(state) && <ArrayItems values={state as Array<any>} />}
       <button onClick={() => setState(3)}>Set 3</button>
       <button onClick={() => setState({ key: 1 })}>Set key: 1</button>
-      <button onClick={() => setState({ key: state?.key + 1 || 2 })}>
+      <button
+        onClick={() =>
+          setState((state: any) => {
+            return { key: state?.key + 1 || 2 }
+          })
+        }
+      >
         Increaae key by 1
       </button>
       <button
         onClick={() =>
           setState((s) => {
-            if (s.shift) {
+            if (Array.isArray(s)) {
               s.unshift((s[0] || 1) + 1)
             } else {
               return [1]
@@ -63,7 +75,7 @@ const App = () => {
       <button
         onClick={() =>
           setState((s) => {
-            if (s.shift) {
+            if (Array.isArray(s)) {
               s.push((s.pop() || 1) + 1)
             } else {
               return [1]
@@ -77,7 +89,7 @@ const App = () => {
       <button
         onClick={() =>
           setState((s) => {
-            if (s.shift) {
+            if (Array.isArray(s)) {
               s.push((s[s?.length - 1] || 1) + 1)
             } else {
               return [1]
@@ -91,21 +103,32 @@ const App = () => {
   )
 }
 
-const Text = memo(({ setState, text, value }) => (
+interface TextProps {
+  setState: SetStateAction
+  text: string
+  value: Any
+}
+
+const Text = memo(({ setState, text, value }: TextProps) => (
   <div onClick={() => setState({ state: { nine: 10 } })}>
     ({new Date().getTime()}) : {text} {value && stringify(value)}
   </div>
 ))
 
-const Array = memo(({ value }) => {
-  return value.map((value, index) => (
+interface ArrayProps {
+  values: Array<any>
+}
+
+// @ts-ignore:next-line
+const ArrayItems = memo<ArrayProps>(({ values }) => {
+  return values.map((value, index) => (
     <Item key={'' + index} {...{ value, index }} />
   ))
 })
 
-const Item = memo(({ value, index }) => (
+const Item = memo(({ value, index }: { value: any; index: number }) => (
   <div>
-    {new Date().getTime()}: {index} => {value}
+    {new Date().getTime()}: {index} &gt; {value}
   </div>
 ))
 
