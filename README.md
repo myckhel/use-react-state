@@ -76,21 +76,63 @@ yarn add use-react-state
 
 ## Usage
 
-```js
+```tsx
 import React from 'react'
 
 import useState from 'use-react-state'
 
 const App = () => {
-  const [state, setState] = useState({ nine: 9 })
+  const [{ signers }, setState] = useState({
+    signers: [{ name: 'John Peter', email: 'johnpeter@gmail.com' }],
+  })
+
+  const addSigners = () => {
+    setState((s) => {
+      s.signers.push({ name: '', email: '' })
+    })
+  }
+
+  const removeSigner = (i: number) => {
+    setState((s) => {
+      delete s.signers[i]
+    })
+  }
 
   return (
     <div>
-      <p>Nine: is {state.nine}</p>
-
-      <button onClick={() => setState(({ nine }) => ({ nine: nine + 1 }))}>
-        Increaae state.nine by 1
-      </button>
+      <h1>Add Signers</h1>
+      {signers.map(({ name, email }, i) => (
+        <Row>
+          <Input
+            defaultValue={name}
+            onChange={(value) =>
+              setState((s) => {
+                s.signers[i].name = value
+              })
+            }
+          />
+          <Input
+            defaultValue={email}
+            type="email"
+            onChange={(value) =>
+              setState((s) => {
+                s.signers[i].email = value
+              })
+            }
+          />
+          <CloseCircleFilled
+            onClick={() => removeSigner(i)}
+            role="button"
+          />
+        </Row>
+      ))}
+      <Button onClick={addSigners}>
+        <PlusOutlined />
+        <span>Add another signer</span>
+      </Button>
+      <Button type="primary" className="my-4">
+        Upload
+      </Button>
     </div>
   )
 }
@@ -104,9 +146,9 @@ const App = () => {
 
 #### @params
 
-- | name                | description           | type  |
-  | ------------------- | --------------------- | ----- |
-  | **`initialState?`** | state's initial state | `any` |
+| -                   | name                  | description | type |
+| ------------------- | --------------------- | ----------- |
+| **`initialState?`** | state's initial state | `any`       |
 
 #### @return
 
@@ -128,9 +170,9 @@ const [state, setState, stateRef] = useState(initialState)
 
 #### @params
 
-- | name                     | description                         | type  |
-  | ------------------------ | ----------------------------------- | ----- |
-  | **`newState\|callback`** | new state to set or setter callback | `any` |
+| -                        | name                                | description | type |
+| ------------------------ | ----------------------------------- | ----------- |
+| **`newState\|callback`** | new state to set or setter callback | `any`       |
 
 #### using setState
 
