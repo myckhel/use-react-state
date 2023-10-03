@@ -1,15 +1,15 @@
 # use-react-state
 
-> react useState is now more intelligent
+> managing state in react is now more intelligent.
 
 [![NPM](https://img.shields.io/npm/v/use-react-state.svg)](https://www.npmjs.com/package/use-react-state) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Overview
 
-`use-react-state` is an advanced implementation of [react component setState](https://reactjs.org/docs/react-component.html#setstate) to be used as a hook in function components.
-It gives almost same and more functionality as [react component setState](https://reactjs.org/docs/react-component.html#setstate).
+`use-react-state` is an advanced implementation of [React's useState](https://reactjs.org/docs/react-component.html#setstate)
+It gives almost the same and more functionality as [React's useState](https://reactjs.org/docs/react-component.html#setstate).
 
-### Why?
+### Using Reacts useState
 😢😭😿
 ```jsx
 import { useState } from 'react'
@@ -36,6 +36,7 @@ function Component(){
 }
 ```
 
+## Using `use-react-state` as useState replacement.
 😊😃😺😄
 ```jsx
 import useState from 'use-react-state'
